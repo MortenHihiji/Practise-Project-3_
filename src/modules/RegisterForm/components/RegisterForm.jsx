@@ -1,8 +1,10 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
+
 import { Button, Block } from 'components';
 import { UserOutlined, LockOutlined, MailOutlined, InfoCircleTwoTone } from '@ant-design/icons';
+import { validateField } from 'utils/helpers';
 
 const onFinish = (values) => {
   console.log('Received values of form: ', values);
@@ -28,7 +30,7 @@ const RegisterForm = (props) => {
             initialValues={{ remember: true }}
             onFinish={onFinish}>
             <Form.Item
-              validateStatus={!touched.email ? '' : errors.email ? 'error' : 'success'}
+              validateStatus={validateField('email', touched, errors)}
               hasFeedback
               help={!touched.email ? undefined : errors.email}>
               <Input
@@ -50,7 +52,7 @@ const RegisterForm = (props) => {
               />
             </Form.Item>
             <Form.Item
-              validateStatus={!touched.password ? '' : errors.password ? 'error' : 'success'}
+              validateStatus={validateField('password', touched, errors)}
               hasFeedback
               name="password"
               help={!touched.password ? undefined : errors.password}>
@@ -65,7 +67,7 @@ const RegisterForm = (props) => {
                 onBlur={handleBlur}
               />
             </Form.Item>
-            <Form.Item name="passwordR">
+            <Form.Item name="password2">
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"

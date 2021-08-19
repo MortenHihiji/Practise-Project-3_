@@ -1,18 +1,16 @@
 import { withFormik } from 'formik';
-import RegisterForm from '../components/RegisterForm';
-import validateFunc from 'utils/validate';
+import LoginForm from '../components/LoginForm';
+import validateForm from 'utils/validate';
 
 export default withFormik({
   mapPropsToValues: () => ({
     email: '',
-    fullname: '',
     password: '',
-    password2: '',
   }),
   validate: (values) => {
     const errors = {};
 
-    validateFunc({ isAuth: false, values, errors });
+    validateForm({ isAuth: true, values, errors });
 
     return errors;
   },
@@ -22,5 +20,5 @@ export default withFormik({
       setSubmitting(false);
     }, 1000);
   },
-  displayName: 'RegisterForm',
-})(RegisterForm);
+  displayName: 'LoginForm',
+})(LoginForm);
