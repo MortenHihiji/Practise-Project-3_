@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import readedSvg from 'assets/img/readed.svg';
 import noReadedSvg from 'assets/img/noreaded.svg';
 
-const IconReaded = ({ isMe, isReaded }) =>
-  isMe &&
-  (isReaded ? (
+const IconReaded = ({ isReaded }) => {
+  isReaded ? (
     <img className="message__icon-readed" src={readedSvg} alt="Readed icon" />
   ) : (
     <img
@@ -13,7 +12,8 @@ const IconReaded = ({ isMe, isReaded }) =>
       src={noReadedSvg}
       alt="Not readed icon"
     />
-  ));
+  );
+};
 
 IconReaded.propTypes = {
   isMe: PropTypes.bool,
