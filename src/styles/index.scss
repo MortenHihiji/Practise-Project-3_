@@ -1,6 +1,12 @@
 @import '~antd/dist/antd.css';
 @import '~reset-css';
 
+@import 'layouts/_chat';
+
+body {
+  background-color: #f4f7fd;
+}
+
 body,
 html,
 #root,
@@ -15,4 +21,14 @@ html,
 
 * {
   outline: none;
+}
+
+.anticon {
+  font-size: 20px;
+  opacity: 0.4;
+  transition: opacity 0.15s ease-in-out;
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
 }

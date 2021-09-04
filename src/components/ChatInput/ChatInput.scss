@@ -1,0 +1,27 @@
+.chat-input {
+  display: flex;
+  padding: 20px;
+  position: relative;
+
+  &__smile-btn {
+    background-color: #fff;
+    padding: 10px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    width: 70px;
+    justify-content: space-between;
+    margin-left: 15px;
+  }
+
+  input {
+    padding: 6px 11px 8px;
+    font-size: 14px;
+    height: 40px;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

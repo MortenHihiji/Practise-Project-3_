@@ -4,7 +4,7 @@ import readedSvg from 'assets/img/readed.svg';
 import noReadedSvg from 'assets/img/noreaded.svg';
 
 const IconReaded = ({ isReaded }) => {
-  isReaded ? (
+  return isReaded ? (
     <img className="message__icon-readed" src={readedSvg} alt="Readed icon" />
   ) : (
     <img
