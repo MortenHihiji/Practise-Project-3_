@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
+import { dialogsActions } from 'redux/actions';
 import { Dialogs as BaseDialogs } from 'components';
 
-const Dialogs = ({ items, userId }) => {
+const Dialogs = ({ fetchDialogs, currentDialogId, setCurrentDialogId, items, userId }) => {
   const [inputValue, setInputValue] = React.useState('');
   const [filtred, setFiltredItems] = React.useState(Array.from(items));
 
@@ -15,9 +17,26 @@ const Dialogs = ({ items, userId }) => {
     setInputValue(value);
   };
 
+  React.useEffect(() => {
+    if (!items.length) {
+      fetchDialogs();
+    } else {
+      setFiltredItems(items);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items]);
+
   return (
-    <BaseDialogs userId={userId} items={filtred} onSearch={onChangeInput} inputValue={inputValue} />
+    <BaseDialogs
+      userId={userId}
+      items={filtred}
+      onSearch={onChangeInput}
+      inputValue={inputValue}
+      onSelectDialog={setCurrentDialogId}
+      currentDialogId={currentDialogId}
+    />
   );
 };
 
-export default Dialogs;
+export default connect(({ dialogs }) => dialogs, dialogsActions)(Dialogs);
