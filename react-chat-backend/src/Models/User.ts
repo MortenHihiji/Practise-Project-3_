@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import isEmail from 'validator/lib/isEmail';
 
-interface IUser extends Document {
+export interface IUser extends Document {
   email: string;
   fullname: string;
   password: string;
@@ -33,7 +33,10 @@ const UserSchema = new Schema(
     },
     avatar: String,
     confirm_hash: String,
-    last_seen: Date,
+    last_seen: {
+      type: Date,
+      default: new Date(),
+    },
   },
   {
     timestamps: true,

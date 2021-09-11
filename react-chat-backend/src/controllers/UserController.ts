@@ -1,5 +1,7 @@
 import express from 'express';
 import { UserModel } from '../Models';
+import { IUser } from '../Models/User';
+import { createJWTToken } from '../utils';
 
 class UserController {
   show(req: express.Request, res: express.Response) {
@@ -46,6 +48,37 @@ class UserController {
           message: `User not found`,
         });
       });
+  }
+
+  login(req: express.Request, res: express.Response) {
+    const postData = {
+      email: req.body.email,
+      password: req.body.password,
+    };
+
+    UserModel.findOne({ email: postData.email }, (err: any, user: IUser) => {
+      if (err) {
+        return res.status(404).json({
+          message: 'User not found',
+        });
+      }
+
+      if (user.password === postData.password) {
+        const token = createJWTToken(user);
+
+        res.json({
+          status: 'success',
+          token,
+        });
+      } else {
+        res.json({
+          status: 'error',
+          message: 'Incorrect password or email',
+        });
+      }
+
+      res.json(user);
+    });
   }
 }
 
