@@ -11,7 +11,8 @@ const onFinish = (values) => {
 };
 
 const LoginForm = (props) => {
-  const { values, touched, errors, handleChange, handleBlur, handleSubmit } = props;
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit, isValid, isSubmitting } =
+    props;
 
   return (
     <div>
@@ -57,7 +58,8 @@ const LoginForm = (props) => {
             />
           </Form.Item>
           <Form.Item>
-            <Button onClick={handleSubmit} type="primary" size="large">
+            {isSubmitting && !isValid && <span>Ошибка!</span>}
+            <Button disabled={isSubmitting} onClick={handleSubmit} type="primary" size="large">
               Войти в аккаунт
             </Button>
           </Form.Item>

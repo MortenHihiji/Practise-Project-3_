@@ -17,15 +17,15 @@ const Dialogs = ({ fetchDialogs, currentDialogId, setCurrentDialogId, items, use
     setInputValue(value);
   };
 
-  React.useEffect(() => {
-    if (!items.length) {
-      fetchDialogs();
-    } else {
-      setFiltredItems(items);
-    }
+  //   React.useEffect(() => {
+  //     if (!items.length) {
+  //       fetchDialogs();
+  //     } else {
+  //       setFiltredItems(items);
+  //     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items]);
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, [items]);
 
   return (
     <BaseDialogs
