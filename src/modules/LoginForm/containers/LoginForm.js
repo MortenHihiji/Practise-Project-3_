@@ -20,14 +20,19 @@ const LoginFormContainer = withFormik({
     return errors;
   },
   handleSubmit: (values, { setSubmitting, props }) => {
-    store.dispatch(userActions.fetchUserLogin(values)).then(({ status }) => {
-      if (status === 'success') {
-        setTimeout(() => {
-          props.history.push('/');
-        }, 500);
-      }
-      setSubmitting(false);
-    });
+    store
+      .dispatch(userActions.fetchUserLogin(values))
+      .then(({ status }) => {
+        if (status === 'success') {
+          setTimeout(() => {
+            props.history.push('/');
+          }, 100);
+        }
+        setSubmitting(false);
+      })
+      .catch(() => {
+        setSubmitting(false);
+      });
   },
   displayName: 'LoginForm',
 })(LoginForm);

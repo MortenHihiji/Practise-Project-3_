@@ -6,11 +6,11 @@ import { Auth, Home } from './pages';
 
 const App = (props) => {
   const { isAuth } = props;
-  console.log(isAuth);
   return (
     <div className="wrapper">
-      <Route exact path={['/login', '/register']} component={Auth} />
-      <Route exact path="/" render={() => (isAuth ? <Home /> : <Redirect to="/login" />)} />
+      <Route exact path={['/signin', '/signup', '/signup/verify']} component={Auth} />
+      <Route exact path="/im" component={Home} />
+      <Route exact path="/" render={() => (isAuth ? <Home /> : <Redirect to="/signin" />)} />
     </div>
   );
 };
