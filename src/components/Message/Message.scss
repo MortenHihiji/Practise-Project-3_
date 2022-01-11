@@ -119,6 +119,12 @@
   &--isme {
     display: flex;
     flex-direction: row-reverse;
+
+    .avatar {
+      margin-right: 0;
+      margin-left: 13px;
+    }
+
     #{$self}__content {
       margin-bottom: 15px;
       flex-direction: row-reverse;

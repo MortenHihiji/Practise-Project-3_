@@ -7,14 +7,14 @@ import { Message } from 'components';
 
 import './Messages.scss';
 
-const Messages = ({ blockRef, isLoading, items }) => {
+const Messages = ({ blockRef, isLoading, items, user }) => {
   return (
     <div ref={blockRef} className={classNames('messages', { 'messages--loading': isLoading })}>
       {isLoading ? (
         <Spin size="large" tip="Загрузка сообщений..."></Spin>
       ) : items && !isLoading ? (
         items.length > 0 ? (
-          items.map((item) => <Message {...item} />)
+          items.map((item) => <Message {...item} isMe={user._id === item.user._id} />)
         ) : (
           <Empty description="Нет сообщений" />
         )

@@ -18,6 +18,7 @@
     $item: &;
     display: flex;
     margin-bottom: 20px;
+    color: $black;
 
     &--selected,
     &--selected:hover {

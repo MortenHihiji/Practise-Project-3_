@@ -12,15 +12,10 @@ const Actions = {
     });
   },
   fetchUserLogin: (postData) => (dispatch) => {
-    return userApi.signIn(postData).then(({ data }) => {
-      const { status, token } = data;
-      if (status === 'error') {
-        openNotification({
-          title: 'Ошибка при авторизации.',
-          text: 'Неверный логин или пароль',
-          type: 'error',
-        });
-      } else {
+    return userApi
+      .signIn(postData)
+      .then(({ data }) => {
+        const { token } = data;
         openNotification({
           title: 'Отлично',
           text: 'Авторизация успешна. Подождите',
@@ -29,15 +24,21 @@ const Actions = {
         window.axios.defaults.headers.common['token'] = token;
         window.localStorage['token'] = token;
         dispatch(Actions.fetchUserData());
-      }
 
-      return data;
-    });
+        return data;
+      })
+      .catch(({ response }) => {
+        if (response.status === 403 || response.status === 422 || response.status === 404) {
+          openNotification({
+            title: 'Ошибка при авторизации.',
+            text: 'Неверный логин или пароль',
+            type: 'error',
+          });
+        }
+      });
   },
   fetchUserRegister: (postData) => (dispatch) => {
     return userApi.signUp(postData).then(({ data }) => {
-      console.log(data);
-
       return data;
     });
   },

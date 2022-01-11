@@ -19,16 +19,19 @@ const Dialogs = ({ items, userId, onSearch, inputValue, currentDialogId, onSelec
       />
     </div>
     {items.length ? (
-      orderBy(items, ['created_at'], ['desc']).map((item) => (
-        <DialogItem
-          onSelect={onSelectDialog}
-          key={item._id}
-          message={item}
-          isMe={item.author._id === userId}
-          currentDialogId={currentDialogId}
-          {...item}
-        />
-      ))
+      orderBy(items, ['created_at'], ['desc']).map(
+        (item) =>
+          console.log(item, 22222222, item.author.id, userId) || (
+            <DialogItem
+              onSelect={onSelectDialog}
+              key={item._id}
+              message={item}
+              isMe={item.author._id === userId}
+              currentDialogId={currentDialogId}
+              {...item}
+            />
+          ),
+      )
     ) : (
       <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="Ничего не найдено" />
     )}

@@ -9,8 +9,12 @@ const App = (props) => {
   return (
     <div className="wrapper">
       <Route exact path={['/signin', '/signup', '/signup/verify']} component={Auth} />
-      <Route exact path="/im" component={Home} />
-      <Route exact path="/" render={() => (isAuth ? <Home /> : <Redirect to="/signin" />)} />
+      {/* <Route exact path="/im" component={Home} /> */}
+      <Route
+        exact
+        path={['/', '/dialog/:id']}
+        render={() => (isAuth ? <Home /> : <Redirect to="/signin" />)}
+      />
     </div>
   );
 };
