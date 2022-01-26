@@ -6,7 +6,15 @@ import socket from 'core/socket';
 
 import { Messages as BaseMessages } from 'components';
 
-const Dialogs = ({ currentDialogId, fetchMessages, addMessage, items, user, isLoading }) => {
+const Dialogs = ({
+  currentDialogId,
+  fetchMessages,
+  addMessage,
+  items,
+  user,
+  isLoading,
+  removeMessageById,
+}) => {
   const messagesRef = React.useRef(null);
 
   const onNewMessage = (data) => {
@@ -31,7 +39,15 @@ const Dialogs = ({ currentDialogId, fetchMessages, addMessage, items, user, isLo
     messagesRef.current.scrollTo(0, 99999);
   }, [items]);
 
-  return <BaseMessages user={user} blockRef={messagesRef} items={items} isLoading={isLoading} />;
+  return (
+    <BaseMessages
+      user={user}
+      blockRef={messagesRef}
+      items={items}
+      isLoading={isLoading}
+      onRemoveMessage={removeMessageById}
+    />
+  );
 };
 
 export default connect(

@@ -30,7 +30,6 @@ const DialogItem = ({
   lastMessage,
 }) => (
   <Link to={`/dialog/${_id}`}>
-    {console.log(lastMessage.user, 55)}
     <div
       className={classNames('dialogs__item', {
         'dialogs__item--online': lastMessage.user.isOnline,
