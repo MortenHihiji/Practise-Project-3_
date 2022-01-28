@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Emoji } from 'emoji-mart';
 import { Popover, Button } from 'antd';
+import { Emoji } from 'emoji-mart';
 import { EllipsisOutlined } from '@ant-design/icons';
+import reactStringReplace from 'react-string-replace';
 
 import { convertCurrentTime } from 'utils/helpers';
 
@@ -126,7 +127,13 @@ const Message = ({
         <div className="message__info">
           {(audio || text || isTyping) && (
             <div className="message__bubble">
-              {text && <p className="message__text">{text}</p>}
+              {text && (
+                <p className="message__text">
+                  {reactStringReplace(text, /:(.+?):/g, (match, i) => (
+                    <Emoji emoji={match} set="apple" size={16} />
+                  ))}
+                </p>
+              )}
               {isTyping && (
                 <div className="message__typing">
                   <span />

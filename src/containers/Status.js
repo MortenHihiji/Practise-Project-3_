@@ -17,7 +17,9 @@ const ChatInput = ({ currentDialogId, dialogs, user }) => {
     partner = currentDialogId.author;
   }
 
-  return <StatusBase online={partner.isOnline} fullname={partner.fullname} />;
+  return null;
+
+  //   return <StatusBase online={partner.isOnline} fullname={partner.fullname} />;
 };
 
 export default connect(({ dialogs, user }) => ({

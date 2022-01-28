@@ -6,7 +6,11 @@ import { Picker } from 'emoji-mart';
 import { Input } from 'antd';
 import { SmileOutlined, CameraOutlined, AudioOutlined, SendOutlined } from '@ant-design/icons';
 
+import { useOutside } from 'utils/helpers';
+
 import './ChatInput.scss';
+
+const { TextArea } = Input;
 
 const ChatInput = (props) => {
   const [value, setValue] = React.useState('');
@@ -24,22 +28,42 @@ const ChatInput = (props) => {
     }
   };
 
+  const addEmoji = (obj) => {
+    const { colons } = obj;
+    setValue((value + ' ' + colons).trim());
+  };
+
+  const handleOutsideClick = (el, e) => {
+    if (el && !el.contains(e.target)) {
+      setShowEmojiPickerVisible(false);
+    }
+  };
+
+  React.useEffect(() => {
+    const el = document.querySelector('.chat-input__smile-btn');
+
+    document.addEventListener('click', handleOutsideClick.bind(this, el));
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick.bind(this, el));
+    };
+  }, []);
+
   return (
     <div className="chat-input">
       <div className="chat-input__smile-btn">
-        {emojiPickerVisible && (
-          <div className="chat-input__emoji-picker">
-            <Picker set="apple" />
-          </div>
-        )}
+        <div className="chat-input__emoji-picker">
+          {emojiPickerVisible && <Picker onSelect={(emojiTag) => addEmoji(emojiTag)} set="apple" />}
+        </div>
         <SmileOutlined onClick={toggleEmojiPicker} />
       </div>
-      <Input
+      <TextArea
         onChange={(e) => setValue(e.target.value)}
         onKeyUp={handleSendMessage}
         size="large"
         placeholder="Введите текст сообщения…"
         value={value}
+        autoSize={{ minRows: 1, maxRows: 6 }}
       />
       <div className="chat-input__actions">
         <UploadField
