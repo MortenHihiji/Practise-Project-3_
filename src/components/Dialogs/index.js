@@ -8,7 +8,7 @@ import './Dialogs.scss';
 
 const { Search } = Input;
 
-const Dialogs = ({ items, userId, onSearch, inputValue, currentDialogId, onSelectDialog }) => (
+const Dialogs = ({ items, userId, onSearch, inputValue, currentDialogId }) => (
   <div className="dialogs">
     <div className="dialogs__search">
       <Search
@@ -23,7 +23,6 @@ const Dialogs = ({ items, userId, onSearch, inputValue, currentDialogId, onSelec
         (item) =>
           console.log(item, 22222222, item.author.id, userId) || (
             <DialogItem
-              onSelect={onSelectDialog}
               key={item._id}
               message={item}
               isMe={item.author._id === userId}

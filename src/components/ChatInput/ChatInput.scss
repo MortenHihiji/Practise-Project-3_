@@ -3,6 +3,10 @@
   padding: 20px;
   position: relative;
 
+  & > div:first-of-type {
+    display: flex;
+  }
+
   &__smile-btn {
     background-color: #fff;
     padding: 10px;
@@ -12,6 +16,55 @@
     position: absolute;
     bottom: 50px;
     z-index: 1;
+  }
+
+  &__record-status {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    color: rgb(245, 107, 107);
+
+    .stop-recording {
+      svg {
+        position: relative;
+        top: -1px;
+        width: 14px;
+        height: 14px;
+      }
+
+      margin-left: 10px;
+    }
+
+    &-bubble {
+      display: inline-block;
+      position: relative;
+      width: 12px;
+      height: 12px;
+      background-color: #f56b6b;
+      border-radius: 30px;
+      //   box-shadow: 0 0 5px #f56b6b;
+
+      margin-right: 10px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 12px;
+        width: 12px;
+        background-color: rgba(245, 107, 107, 0.5);
+        border-radius: 30px;
+        animation: wave-animation 1s ease-in-out infinite;
+        transition: transform 0.15s ease-in-out;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &__attachments {
+    padding-left: 60px;
   }
 
   &__actions {
@@ -41,5 +94,17 @@
     &:focus {
       box-shadow: none;
     }
+  }
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: sacle(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }

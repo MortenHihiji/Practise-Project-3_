@@ -6,7 +6,7 @@ import socket from 'core/socket';
 
 import { Dialogs as BaseDialogs } from 'components';
 
-const Dialogs = ({ fetchDialogs, currentDialogId, setCurrentDialogId, items, userId }) => {
+const Dialogs = ({ fetchDialogs, currentDialogId, items, userId }) => {
   const [inputValue, setInputValue] = React.useState('');
   const [filtred, setFiltredItems] = React.useState(Array.from(items));
 
@@ -25,14 +25,11 @@ const Dialogs = ({ fetchDialogs, currentDialogId, setCurrentDialogId, items, use
     if (items.length) {
       onChangeInput();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items]);
 
   React.useEffect(() => {
     fetchDialogs();
-    // if (!items.length) {
-    // } else {
-    //   setFiltredItems(items);
-    // }
 
     socket.on('SERVER:DIALOG_CREATED', fetchDialogs);
     socket.on('SERVER:NEW_MESSAGE', fetchDialogs);
@@ -49,7 +46,6 @@ const Dialogs = ({ fetchDialogs, currentDialogId, setCurrentDialogId, items, use
       items={filtred}
       onSearch={onChangeInput}
       inputValue={inputValue}
-      onSelectDialog={setCurrentDialogId}
       currentDialogId={currentDialogId}
     />
   );

@@ -13,7 +13,8 @@ const App = (props) => {
       <Route
         exact
         path={['/', '/dialog/:id']}
-        render={() => (isAuth ? <Home /> : <Redirect to="/signin" />)}
+        // render={() => (isAuth ? <Home /> : <Redirect to="/signin" />)}
+        render={() => (isAuth ? <Home /> : <Home />)}
       />
     </div>
   );

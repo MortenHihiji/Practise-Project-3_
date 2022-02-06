@@ -15,6 +15,10 @@ const Dialogs = ({
   isLoading,
   removeMessageById,
 }) => {
+  // if(!currentDialogId) {
+  //     return null;
+  // }
+
   const messagesRef = React.useRef(null);
 
   const onNewMessage = (data) => {
